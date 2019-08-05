@@ -1,0 +1,53 @@
+﻿<Window x:Class="ActivityMonitor.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ActivityMonitor.View"
+        mc:Ignorable="d"
+        Title="Activity Monitor" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Current Process" FontWeight="Bold" Padding="4"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Title"/>
+                <TextBox Text="{Binding CurrentProcess.Title, 
+                    UpdateSourceTrigger=PropertyChanged,
+                    Mode=OneWay
+                    }" IsReadOnly="True" Grid.Column="1"/>
+                <TextBlock Text="File Name" Grid.Row="1"/>
+                <TextBox Text="{Binding CurrentProcess.FileName, 
+                    UpdateSourceTrigger=PropertyChanged,
+                    Mode=OneWay
+                    }" IsReadOnly="True" Grid.Column="1" Grid.Row="1"/>
+                <TextBlock Text="Activation Date" Grid.Row="2"/>
+                <TextBox Text="{Binding CurrentProcess.ActivationTime, 
+                    UpdateSourceTrigger=PropertyChanged,
+                    Mode=OneWay
+                    }" IsReadOnly="True" Grid.Column="1" Grid.Row="2"/>
+            </Grid>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <TextBlock Text="All Processes" FontWeight="Bold" TextAlignment="Center"/>
+            <DataGrid ItemsSource="{Binding AllProcesses}"/>
+        </StackPanel>
+    </Grid>
+</Window>
